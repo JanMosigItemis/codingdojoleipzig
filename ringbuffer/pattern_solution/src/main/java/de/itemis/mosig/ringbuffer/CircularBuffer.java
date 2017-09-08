@@ -17,6 +17,7 @@ public class CircularBuffer {
 	}
 
 	public Integer take() {
+		count--;
 		return elements[0];
 	}
 
