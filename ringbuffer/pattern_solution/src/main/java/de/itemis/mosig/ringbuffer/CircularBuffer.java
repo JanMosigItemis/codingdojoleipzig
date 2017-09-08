@@ -13,6 +13,10 @@ public class CircularBuffer {
 		count++;
 	}
 
+	public void take() {
+
+	}
+
 	public int size() {
 		return size;
 	}
