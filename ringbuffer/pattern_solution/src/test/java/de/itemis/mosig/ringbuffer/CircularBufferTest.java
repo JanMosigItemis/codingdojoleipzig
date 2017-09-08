@@ -13,4 +13,10 @@ public class CircularBufferTest {
 		CircularBuffer underTest = new CircularBuffer(expectedSize);
 		Assert.assertEquals(expectedSize, underTest.size());
 	}
+
+	@Test
+	public void countShouldReturnZeroIfBufferIsEmpty() {
+		CircularBuffer underTest = new CircularBuffer(3);
+		underTest.count();
+	}
 }
