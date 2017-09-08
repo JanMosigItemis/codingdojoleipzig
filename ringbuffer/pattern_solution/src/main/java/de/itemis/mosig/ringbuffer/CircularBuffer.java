@@ -3,13 +3,14 @@ package de.itemis.mosig.ringbuffer;
 public class CircularBuffer {
 
 	private final int size;
+	private int count = 0;
 
 	public CircularBuffer(int size) {
 		this.size = size;
 	}
 
 	public void add() {
-
+		count++;
 	}
 
 	public int size() {
@@ -17,6 +18,6 @@ public class CircularBuffer {
 	}
 
 	public int count() {
-		return 0;
+		return count;
 	}
 }
