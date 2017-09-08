@@ -1,5 +1,7 @@
 package de.itemis.mosig.ringbuffer;
 
+import java.util.Arrays;
+
 public class CircularBuffer {
 
 	private final int size;
@@ -18,7 +20,10 @@ public class CircularBuffer {
 
 	public Integer take() {
 		count--;
-		return elements[0];
+		Integer result = elements[0];
+		elements = Arrays.copyOfRange(elements, 1, size + 1);
+
+		return result;
 	}
 
 	public int size() {
