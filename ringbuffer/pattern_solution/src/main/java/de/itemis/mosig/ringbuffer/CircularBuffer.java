@@ -12,7 +12,7 @@ public class CircularBuffer {
 	private Integer[] elements = null;
 
 	public CircularBuffer(int size) {
-		Preconditions.checkArgument(size != 0);
+		Preconditions.checkArgument(size > 0);
 
 		this.size = size;
 		this.elements = new Integer[size];
