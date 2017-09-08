@@ -7,6 +7,8 @@ import org.junit.Test;
 
 public class CircularBufferTest {
 
+	private static final int TEST_SIZE = 3;
+
 	@Test
 	public void whenPassingRandomNbrToTheConstructorSizeShouldBeThatNbr() {
 		int expectedSize = generateRandomIntInRangeZeroToMax();
@@ -16,14 +18,14 @@ public class CircularBufferTest {
 
 	@Test
 	public void countShouldReturnZeroIfBufferIsEmpty() {
-		CircularBuffer underTest = createTestBuffer(3);
+		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		Assert.assertEquals(0, underTest.count());
 	}
 
 	@Test
 	public void countShouldReturnOneWhenAddingAnElementToAnEmptyBuffer() {
-		CircularBuffer underTest = createTestBuffer(3);
-		underTest.add();
+		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
+		underTest.add(1);
 		Assert.assertEquals(1, underTest.count());
 	}
 
