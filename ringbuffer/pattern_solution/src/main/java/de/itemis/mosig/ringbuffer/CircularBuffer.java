@@ -9,7 +9,7 @@ public class CircularBuffer {
 		this.size = size;
 	}
 
-	public void add() {
+	public void add(int element) {
 		count++;
 	}
 
