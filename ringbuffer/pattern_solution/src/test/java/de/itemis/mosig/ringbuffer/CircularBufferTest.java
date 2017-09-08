@@ -23,12 +23,15 @@ public class CircularBufferTest {
 	}
 
 	@Test
-	public void countShouldReturnOneWhenAddingAnElementToAnEmptyBuffer() {
+	public void countShouldBeOneWhenAddingAnElementToAnEmptyBuffer() {
 		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		underTest.add(1);
 		Assert.assertEquals(1, underTest.count());
 	}
 
+	/*
+	 * ############## private helper ##############
+	 */
 	private CircularBuffer createTestBuffer(int expectedSize) {
 		return new CircularBuffer(expectedSize);
 	}
