@@ -62,6 +62,17 @@ public class CircularBufferTest {
 		Assert.assertEquals(1, underTest.count());
 	}
 
+	@Test
+	public void firstElementMustBe2WhenAdding1And2AndTaking1AndAdding3() {
+		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
+		underTest.add(1);
+		underTest.add(2);
+		underTest.take();
+		underTest.add(3);
+		Integer result = underTest.take();
+		Assert.assertEquals(new Integer(2), result);
+	}
+
 	/*
 	 * ############## private helper ##############
 	 */
