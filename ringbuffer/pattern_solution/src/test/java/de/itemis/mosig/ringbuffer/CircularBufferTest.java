@@ -44,6 +44,15 @@ public class CircularBufferTest {
 		Assert.assertEquals(new Integer(1), result);
 	}
 
+	@Test
+	public void takeShouldReturnFirstElementOnATwoElementBuffer() {
+		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
+		underTest.add(1);
+		underTest.add(2);
+		Integer result = underTest.take();
+		Assert.assertEquals(new Integer(1), result);
+	}
+
 	/*
 	 * ############## private helper ##############
 	 */
