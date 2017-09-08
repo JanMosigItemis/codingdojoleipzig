@@ -24,6 +24,7 @@ public class CircularBufferTest {
 	public void countShouldReturnOneWhenAddingAnElementToAnEmptyBuffer() {
 		CircularBuffer underTest = createTestBuffer(3);
 		underTest.add();
+		Assert.assertEquals(1, underTest.count());
 	}
 
 	private CircularBuffer createTestBuffer(int expectedSize) {
