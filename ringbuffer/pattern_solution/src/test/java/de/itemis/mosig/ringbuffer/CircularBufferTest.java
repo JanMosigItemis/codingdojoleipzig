@@ -33,6 +33,7 @@ public class CircularBufferTest {
 	public void takeShouldReturnNullOnAnEmptyBuffer() {
 		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		Integer result = underTest.take();
+		Assert.assertNull(result);
 	}
 
 	/*
