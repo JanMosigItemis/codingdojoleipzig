@@ -71,6 +71,15 @@ public class CircularBufferTest {
 		assertTake(2);
 	}
 
+	@Test
+	public void addingSizePlusOneElementsOverwritesOldestElement() {
+		underTest.add(1);
+		underTest.add(2);
+		underTest.add(3);
+		underTest.add(4);
+		assertTake(2);
+	}
+
 	/*
 	 * ############## private helper ##############
 	 */
