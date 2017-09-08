@@ -14,8 +14,13 @@ public class CircularBuffer {
 	}
 
 	public void add(int element) {
-		this.elements[count] = element;
-		count++;
+		if (count < size) {
+			this.elements[count] = element;
+			count++;
+		} else {
+			take();
+			add(element);
+		}
 	}
 
 	public Integer take() {
