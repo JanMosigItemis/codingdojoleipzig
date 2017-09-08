@@ -80,6 +80,11 @@ public class CircularBufferTest {
 		assertTake(2);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void constructorMustThrowIllegalArgumentExceptionIfProvidedSizeIsZero() {
+		createTestBuffer(0);
+	}
+
 	/*
 	 * ############## private helper ##############
 	 */
