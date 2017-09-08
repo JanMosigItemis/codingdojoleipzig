@@ -9,14 +9,22 @@ public class CircularBufferTest {
 
 	@Test
 	public void whenPassingRandomNbrToTheConstructorSizeShouldBeThatNbr() {
-		int expectedSize = new Random().nextInt(Integer.MAX_VALUE);
-		CircularBuffer underTest = new CircularBuffer(expectedSize);
+		int expectedSize = generateRandomIntInRangeZeroToMax();
+		CircularBuffer underTest = createTestBuffer(expectedSize);
 		Assert.assertEquals(expectedSize, underTest.size());
 	}
 
 	@Test
 	public void countShouldReturnZeroIfBufferIsEmpty() {
-		CircularBuffer underTest = new CircularBuffer(3);
+		CircularBuffer underTest = createTestBuffer(3);
 		Assert.assertEquals(0, underTest.count());
+	}
+
+	private CircularBuffer createTestBuffer(int expectedSize) {
+		return new CircularBuffer(expectedSize);
+	}
+
+	private int generateRandomIntInRangeZeroToMax() {
+		return new Random().nextInt(Integer.MAX_VALUE);
 	}
 }
