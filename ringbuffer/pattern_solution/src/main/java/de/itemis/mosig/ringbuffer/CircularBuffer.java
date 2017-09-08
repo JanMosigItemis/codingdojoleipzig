@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class CircularBuffer {
 
 	private final int size;
+
 	private int count = 0;
 	private Integer[] elements = null;
 
@@ -14,19 +15,19 @@ public class CircularBuffer {
 	}
 
 	public void add(int element) {
-		if (count < size) {
-			this.elements[count] = element;
-			count++;
-		} else {
+		if (bufferIsFull()) {
 			take();
 			add(element);
+		} else {
+			this.elements[count] = element;
+			count++;
 		}
 	}
 
 	public Integer take() {
 		count--;
 		Integer result = elements[0];
-		elements = Arrays.copyOfRange(elements, 1, size + 1);
+		shiftLeftByOneElement();
 
 		return result;
 	}
@@ -37,5 +38,13 @@ public class CircularBuffer {
 
 	public int count() {
 		return count;
+	}
+
+	private boolean bufferIsFull() {
+		return count == size;
+	}
+
+	private void shiftLeftByOneElement() {
+		elements = Arrays.copyOfRange(elements, 1, size + 1);
 	}
 }
