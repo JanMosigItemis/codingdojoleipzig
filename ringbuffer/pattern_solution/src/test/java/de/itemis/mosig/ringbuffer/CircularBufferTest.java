@@ -29,6 +29,12 @@ public class CircularBufferTest {
 		Assert.assertEquals(1, underTest.count());
 	}
 
+	@Test
+	public void takeShouldReturnNullOnAnEmptyBuffer() {
+		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
+		underTest.take();
+	}
+
 	/*
 	 * ############## private helper ##############
 	 */
