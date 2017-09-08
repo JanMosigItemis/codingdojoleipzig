@@ -20,6 +20,12 @@ public class CircularBufferTest {
 		Assert.assertEquals(0, underTest.count());
 	}
 
+	@Test
+	public void countShouldReturnOneWhenAddingAnElementToAnEmptyBuffer() {
+		CircularBuffer underTest = createTestBuffer(3);
+		underTest.add();
+	}
+
 	private CircularBuffer createTestBuffer(int expectedSize) {
 		return new CircularBuffer(expectedSize);
 	}
