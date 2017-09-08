@@ -3,79 +3,87 @@ package de.itemis.mosig.ringbuffer;
 import java.util.Random;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CircularBufferTest {
 
 	private static final int TEST_SIZE = 3;
 
+	private CircularBuffer underTest;
+
+	@Before
+	public void setUp() {
+		underTest = createTestBuffer(TEST_SIZE);
+	}
+
 	@Test
 	public void whenPassingRandomNbrToTheConstructorSizeShouldBeThatNbr() {
 		int expectedSize = generateRandomIntInRangeZeroTo1000();
-		CircularBuffer underTest = createTestBuffer(expectedSize);
-		Assert.assertEquals(expectedSize, underTest.size());
+		CircularBuffer localUnderTest = createTestBuffer(expectedSize);
+		Assert.assertEquals(expectedSize, localUnderTest.size());
 	}
 
 	@Test
 	public void countShouldReturnZeroIfBufferIsEmpty() {
-		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
-		Assert.assertEquals(0, underTest.count());
+		assertCount(0);
 	}
 
 	@Test
 	public void countShouldBeOneWhenAddingAnElementToAnEmptyBuffer() {
-		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		underTest.add(1);
-		Assert.assertEquals(1, underTest.count());
+		assertCount(1);
 	}
 
 	@Test
 	public void takeShouldReturnNullOnAnEmptyBuffer() {
-		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		Integer result = underTest.take();
 		Assert.assertNull(result);
 	}
 
 	@Test
 	public void takeShouldReturnElementOnAOneElementBuffer() {
-		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		underTest.add(1);
-		Integer result = underTest.take();
-		Assert.assertEquals(new Integer(1), result);
+		assertTake(1);
 	}
 
 	@Test
 	public void takeShouldReturnFirstElementOnATwoElementBuffer() {
-		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		underTest.add(1);
 		underTest.add(2);
-		Integer result = underTest.take();
-		Assert.assertEquals(new Integer(1), result);
+		assertTake(1);
 	}
 
 	@Test
 	public void countShouldBeOneWhenAddingTwoElementsAndTakingOne() {
-		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		underTest.add(1);
 		underTest.add(2);
 		underTest.take();
-		Assert.assertEquals(1, underTest.count());
+		assertCount(1);
 	}
 
 	@Test
 	public void firstElementMustBe2WhenAdding1And2AndTaking1AndAdding3() {
-		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
 		underTest.add(1);
 		underTest.add(2);
 		underTest.take();
 		underTest.add(3);
-		Integer result = underTest.take();
-		Assert.assertEquals(new Integer(2), result);
+		assertTake(2);
 	}
 
 	/*
 	 * ############## private helper ##############
 	 */
+
+	private void assertCount(int expectedResult) {
+		Assert.assertEquals(expectedResult, underTest.count());
+	}
+
+	private void assertTake(int expectedResult) {
+		Integer result = underTest.take();
+		Assert.assertEquals(new Integer(expectedResult), result);
+	}
+
 	private CircularBuffer createTestBuffer(int expectedSize) {
 		return new CircularBuffer(expectedSize);
 	}
