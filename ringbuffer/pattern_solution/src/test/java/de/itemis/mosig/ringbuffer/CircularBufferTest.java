@@ -6,6 +6,6 @@ public class CircularBufferTest {
 
 	@Test
 	public void constructorShouldSetProvidedSize() {
-		new CircularBuffer();
+		new CircularBuffer(3);
 	}
 }
