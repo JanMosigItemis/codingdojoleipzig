@@ -11,7 +11,7 @@ public class CircularBufferTest {
 
 	@Test
 	public void whenPassingRandomNbrToTheConstructorSizeShouldBeThatNbr() {
-		int expectedSize = generateRandomIntInRangeZeroToMax();
+		int expectedSize = generateRandomIntInRangeZeroTo1000();
 		CircularBuffer underTest = createTestBuffer(expectedSize);
 		Assert.assertEquals(expectedSize, underTest.size());
 	}
@@ -60,7 +60,8 @@ public class CircularBufferTest {
 		return new CircularBuffer(expectedSize);
 	}
 
-	private int generateRandomIntInRangeZeroToMax() {
-		return new Random().nextInt(Integer.MAX_VALUE);
+	private int generateRandomIntInRangeZeroTo1000() {
+		int resultRangeUpperBound = 1000;
+		return new Random().nextInt(resultRangeUpperBound);
 	}
 }

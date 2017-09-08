@@ -4,19 +4,20 @@ public class CircularBuffer {
 
 	private final int size;
 	private int count = 0;
-	private Integer element = null;
+	private Integer[] elements = null;
 
 	public CircularBuffer(int size) {
 		this.size = size;
+		this.elements = new Integer[size];
 	}
 
 	public void add(int element) {
-		this.element = element;
+		this.elements[count] = element;
 		count++;
 	}
 
 	public Integer take() {
-		return this.element;
+		return elements[0];
 	}
 
 	public int size() {
