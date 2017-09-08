@@ -11,4 +11,8 @@ public class CircularBuffer {
 	public int size() {
 		return size;
 	}
+
+	public void count() {
+
+	}
 }
