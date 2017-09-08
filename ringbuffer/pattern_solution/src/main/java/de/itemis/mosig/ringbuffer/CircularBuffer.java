@@ -2,6 +2,8 @@ package de.itemis.mosig.ringbuffer;
 
 import java.util.Arrays;
 
+import com.google.common.base.Preconditions;
+
 public class CircularBuffer {
 
 	private final int size;
@@ -10,6 +12,8 @@ public class CircularBuffer {
 	private Integer[] elements = null;
 
 	public CircularBuffer(int size) {
+		Preconditions.checkArgument(size != 0);
+
 		this.size = size;
 		this.elements = new Integer[size];
 	}
