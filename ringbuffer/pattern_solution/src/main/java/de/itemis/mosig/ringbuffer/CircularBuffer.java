@@ -8,6 +8,10 @@ public class CircularBuffer {
 		this.size = size;
 	}
 
+	public void add() {
+
+	}
+
 	public int size() {
 		return size;
 	}
