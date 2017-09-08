@@ -53,6 +53,15 @@ public class CircularBufferTest {
 		Assert.assertEquals(new Integer(1), result);
 	}
 
+	@Test
+	public void countShouldBeOneWhenAddingTwoElementsAndTakingOne() {
+		CircularBuffer underTest = createTestBuffer(TEST_SIZE);
+		underTest.add(1);
+		underTest.add(2);
+		underTest.take();
+		Assert.assertEquals(1, underTest.count());
+	}
+
 	/*
 	 * ############## private helper ##############
 	 */
