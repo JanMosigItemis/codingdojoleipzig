@@ -1,0 +1,10 @@
+word, 6 | word
+123456789, 6 | 123456 newline 789
+123456789, 3 | 123 newline 456 newline 789
+word word word, 6 | word newline word newline word
+123456789 word word, 6 | 123456 newline 789 newline word newline word
+word word, 4 | word newline word
+aaaa, 1 | a newline a newline a newline a
+a, 1 | a
+aaa, 2 | aa newline a
+bbbb, 1 | b newline b newline b newline b
