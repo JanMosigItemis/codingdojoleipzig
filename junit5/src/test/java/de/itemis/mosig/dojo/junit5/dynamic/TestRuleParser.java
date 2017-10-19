@@ -23,7 +23,6 @@ import java.util.stream.Stream;
  */
 public final class TestRuleParser {
 
-    public static final String NEWLINE_INDICATOR = "newline";
     public static final char EXPECTED_OUTPUT_SEPARATOR = '|';
     public static final char INPUT_SEPARATOR = ',';
 
@@ -84,13 +83,7 @@ public final class TestRuleParser {
         }
         String rawExpectedResult = splittedRuleLine[1].trim();
 
-        String[] expectedWords = rawExpectedResult.split(NEWLINE_INDICATOR);
-
-        String expectedResult = expectedWords[0].trim();
-        for (int i = 1; i < expectedWords.length; i++) {
-            expectedResult += "\n" + expectedWords[i].trim();
-        }
-
+        String expectedResult = rawExpectedResult.replaceAll("(\\\\n)+", "\n");
         return new ParsedTestRule(input, columnNbr, expectedResult);
     }
 }

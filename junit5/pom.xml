@@ -32,7 +32,7 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-		
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
@@ -90,8 +90,8 @@
                     <!-- <includes> <include>**/Test*.java</include> <include>**/*Test.java</include>
                         <include>**/*Tests.java</include> <include>**/*TestCase.java</include> </includes> -->
                     <properties>
-                        <!--<includeTags>Untestbar</includeTags>-->
-                        <!--<excludeTags>slow</excludeTags>-->
+                        <!-- <includeTags>fast</includeTags> -->
+                        <!-- <excludeTags>slow</excludeTags> -->
                     </properties>
                 </configuration>
                 <dependencies>
