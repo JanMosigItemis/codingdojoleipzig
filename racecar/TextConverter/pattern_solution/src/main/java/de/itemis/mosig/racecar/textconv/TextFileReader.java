@@ -8,7 +8,7 @@ public class TextFileReader {
 
     }
 
-    public void contents() {
-
+    public String contents() {
+        return null;
     }
 }
