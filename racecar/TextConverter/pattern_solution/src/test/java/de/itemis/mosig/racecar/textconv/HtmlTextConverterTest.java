@@ -10,7 +10,7 @@ import java.io.IOException;
 public class HtmlTextConverterTest {
 
     @Test
-    public void shouldConverAngelBracketsToHtmlCounterParts() {
+    public void shouldConvertAngelBracketsToHtmlCounterParts() {
         HtmlTextConverter underTest = new HtmlTextConverter();
 
         String result = underTest.convertToHtml("<>" );
@@ -19,7 +19,7 @@ public class HtmlTextConverterTest {
     }
 
     @Test
-    public void shouldConverAmpsToHtmlCounterParts() {
+    public void shouldConvertAmpsToHtmlCounterParts() {
         HtmlTextConverter underTest = new HtmlTextConverter();
 
         String result = underTest.convertToHtml("&" );
@@ -28,11 +28,20 @@ public class HtmlTextConverterTest {
     }
 
     @Test
-    public void shouldConverDoubleQuotesToHtmlCounterParts() {
+    public void shouldConvertDoubleQuotesToHtmlCounterParts() {
         HtmlTextConverter underTest = new HtmlTextConverter();
 
         String result = underTest.convertToHtml("\"" );
 
         Assert.assertEquals("&quot;",result);
+    }
+
+    @Test
+    public void shouldConvertSingleQuotesToHtmlCounterParts() {
+        HtmlTextConverter underTest = new HtmlTextConverter();
+
+        String result = underTest.convertToHtml("'" );
+
+        Assert.assertEquals("&#39;",result);
     }
 }
