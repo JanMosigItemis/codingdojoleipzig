@@ -8,6 +8,8 @@ public class TextFileReaderTest {
 
     @Test
     public void shouldReadContentsOfExistingFile() {
-        new TextFileReader(Paths.get(""));
+        TextFileReader underTest = new TextFileReader(Paths.get(""));
+
+        underTest.contents();
     }
 }
