@@ -17,7 +17,7 @@ public class AlarmTest {
 
     @Before
     public void setUp() {
-        mockedSensor = Mockito.mock(Sensor.class);
+        mockedSensor = Mockito.spy(new Sensor());
         Mockito.when(mockedSensor.popNextPressurePsiValue()).thenCallRealMethod();
         underTest = createUnderTest(mockedSensor);
     }

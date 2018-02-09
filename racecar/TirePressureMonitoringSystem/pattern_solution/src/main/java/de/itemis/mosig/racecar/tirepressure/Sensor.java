@@ -3,18 +3,20 @@ package de.itemis.mosig.racecar.tirepressure;
 import java.util.Random;
 
 public class Sensor {
-    public static final double OFFSET = 16;
+    private static final double OFFSET = 16;
 
-    public double popNextPressurePsiValue() {
-        double pressureTelemetryValue;
-        pressureTelemetryValue = samplePressure( );
+    private final Random basicRandomNumbersGenerator;
 
-        return OFFSET + pressureTelemetryValue;
+    public Sensor() {
+        this.basicRandomNumbersGenerator = new Random();
     }
 
-    private static double samplePressure() {
-        Random basicRandomNumbersGenerator = new Random();
-        double pressureTelemetryValue = 6 * basicRandomNumbersGenerator.nextDouble() * basicRandomNumbersGenerator.nextDouble();
-        return pressureTelemetryValue;
+
+    public double popNextPressurePsiValue() {
+        return OFFSET + samplePressure();
+    }
+
+    private double samplePressure() {
+        return 6 * basicRandomNumbersGenerator.nextDouble() * basicRandomNumbersGenerator.nextDouble();
     }
 }
