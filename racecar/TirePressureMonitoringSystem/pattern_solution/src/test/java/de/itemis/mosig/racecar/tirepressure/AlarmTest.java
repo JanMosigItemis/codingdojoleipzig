@@ -36,7 +36,7 @@ public class AlarmTest {
 
     @Test
     public void alarmShouldGoOffIfPressureIsAboveInterval() {
-        setupNextPressureValue(21);
+        setupNextPressureValue(21 + 1);
 
         underTest.check();
         assertEquals(true, underTest.isAlarmOn());
