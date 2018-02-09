@@ -46,7 +46,7 @@ public class TextFileReaderTest {
     public void shouldReadContentsOfExistingFile() {
         String expectedContent = generateRandomString();
         writeToTestFile(expectedContent);
-        TextFileReader underTest = new TextFileReader(tmpFilePath);
+        TextFileReader underTest = createUnderTest(tmpFilePath);
 
         String result = underTest.contents();
 
@@ -55,7 +55,7 @@ public class TextFileReaderTest {
 
     @Test
     public void shouldReadContentsOfEmptyFile() {
-        TextFileReader underTest = new TextFileReader(tmpFilePath);
+        TextFileReader underTest = createUnderTest(tmpFilePath);
 
         String result = underTest.contents();
 
@@ -65,7 +65,7 @@ public class TextFileReaderTest {
     @Test
     public void shouldThrowExceptionIfFileDoesNotExist() {
         Path nonExistingPath = tmpFilePath.resolve("non_existing");
-        TextFileReader underTest = new TextFileReader(nonExistingPath);
+        TextFileReader underTest = createUnderTest(nonExistingPath);
 
         try {
             underTest.contents();
@@ -78,6 +78,10 @@ public class TextFileReaderTest {
     /*
      * ##### start private helper code
      */
+
+    private TextFileReader createUnderTest(Path filePath) {
+        return new TextFileReader(filePath);
+    }
 
     private void writeToTestFile(String contents) {
         try {
