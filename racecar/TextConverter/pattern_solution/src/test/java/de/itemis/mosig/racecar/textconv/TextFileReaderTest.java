@@ -71,7 +71,7 @@ public class TextFileReaderTest {
             underTest.contents();
             Assert.fail("Did not throw expected exception.");
         } catch (Exception e) {
-            Assert.assertEquals("File '" + nonExistingPath + "' does not exist.", e.getMessage());
+            Assert.assertEquals("Error while reading file '" + nonExistingPath + "'.", e.getMessage());
         }
     }
 
