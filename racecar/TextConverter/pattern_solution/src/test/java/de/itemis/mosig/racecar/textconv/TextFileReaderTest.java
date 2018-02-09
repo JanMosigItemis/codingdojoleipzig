@@ -41,8 +41,9 @@ public class TextFileReaderTest {
             }
         }
     }
+
     @Test
-    public void shouldReadContentsOfExistingFile() throws IOException {
+    public void shouldReadContentsOfExistingFile() {
         String expectedContent = generateRandomString();
         writeToTestFile(expectedContent);
         TextFileReader underTest = new TextFileReader(tmpFilePath);
@@ -50,6 +51,28 @@ public class TextFileReaderTest {
         String result = underTest.contents();
 
         Assert.assertEquals(expectedContent, result);
+    }
+
+    @Test
+    public void shouldReadContentsOfEmptyFile() {
+        TextFileReader underTest = new TextFileReader(tmpFilePath);
+
+        String result = underTest.contents();
+
+        Assert.assertEquals("", result);
+    }
+
+    @Test
+    public void shouldThrowExceptionIfFileDoesNotExist() {
+        Path nonExistingPath = tmpFilePath.resolve("non_existing");
+        TextFileReader underTest = new TextFileReader(nonExistingPath);
+
+        try {
+            underTest.contents();
+            Assert.fail("Did not throw expected exception.");
+        } catch (Exception e) {
+            Assert.assertEquals("File '" + nonExistingPath + "' does not exist.", e.getMessage());
+        }
     }
 
     /*
