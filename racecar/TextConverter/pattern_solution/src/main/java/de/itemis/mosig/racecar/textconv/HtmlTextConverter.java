@@ -16,17 +16,14 @@ public class HtmlTextConverter {
     public String convertToHtml(String input) {
 
         String result = "";
+        String firstChar = input.charAt(0)+"";
 
-        for(int i=0;i<input.length();i++) {
-            String currentChar = input.charAt(i) + "";
-            switch(currentChar) {
-                case "<" : result += "&lt;"; break;
-                case ">" : result += "&gt;"; break;
-                case "&" : result += "&amp;"; break;
-                case "\"" : result += "&quot;"; break;
-                case "'" : result += "&#39;"; break;
-                default : result += currentChar;
-            }
+        switch(firstChar) {
+            case "<" : result += "&lt;"; break;
+            case ">" : result += "&gt;"; break;
+            case "&" : result += "&amp;"; break;
+            case "\"" : result += "&quot;"; break;
+            case "'" : result += "&#39;"; break;
         }
 
 	    return result;

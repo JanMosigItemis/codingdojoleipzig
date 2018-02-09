@@ -10,12 +10,21 @@ import java.io.IOException;
 public class HtmlTextConverterTest {
 
     @Test
-    public void shouldConvertAngelBracketsToHtmlCounterParts() {
+    public void shouldConvertLeftAngelBracketsToHtmlCounterParts() {
         HtmlTextConverter underTest = new HtmlTextConverter();
 
-        String result = underTest.convertToHtml("<>" );
+        String result = underTest.convertToHtml("<" );
 
-        Assert.assertEquals("&lt;&gt;",result);
+        Assert.assertEquals("&lt;",result);
+    }
+
+    @Test
+    public void shouldConvertRightAngelBracketsToHtmlCounterParts() {
+        HtmlTextConverter underTest = new HtmlTextConverter();
+
+        String result = underTest.convertToHtml(">" );
+
+        Assert.assertEquals("&gt;",result);
     }
 
     @Test
