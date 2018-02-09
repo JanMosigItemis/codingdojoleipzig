@@ -24,6 +24,7 @@ public class HtmlTextConverter {
                 case ">" : result += "&gt;"; break;
                 case "&" : result += "&amp;"; break;
                 case "\"" : result += "&quot;"; break;
+                case "'" : result += "&#39;"; break;
                 default : result += currentChar;
             }
         }
