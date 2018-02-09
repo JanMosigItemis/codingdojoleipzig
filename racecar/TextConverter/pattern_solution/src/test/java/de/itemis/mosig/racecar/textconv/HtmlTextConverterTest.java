@@ -3,14 +3,18 @@ package de.itemis.mosig.racecar.textconv;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class HtmlTextConverterTest {
+
+    private TextFileReader fileReaderMock;
 
     private HtmlTextConverter underTest;
 
     @Before
     public void setUp() {
-        underTest = new HtmlTextConverter(new TextFileReader(null));
+        fileReaderMock = Mockito.mock(TextFileReader.class);
+        underTest = new HtmlTextConverter(fileReaderMock);
     }
 
     @Test
@@ -58,7 +62,9 @@ public class HtmlTextConverterTest {
      */
 
     private void assertConvertResult(String input, String expectedOutput) {
-        String result = underTest.convertToHtml(input);
+        Mockito.when(fileReaderMock.contents()).thenReturn(input);
+
+        String result = underTest.convertToHtml();
         Assert.assertEquals(expectedOutput,result);
     }
 }
