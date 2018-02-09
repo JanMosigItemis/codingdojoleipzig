@@ -10,7 +10,7 @@ public class HtmlTextConverterTest {
 
     @Before
     public void setUp() {
-        underTest = new HtmlTextConverter();
+        underTest = new HtmlTextConverter(new TextFileReader(null));
     }
 
     @Test
