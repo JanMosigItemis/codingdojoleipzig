@@ -1,77 +1,64 @@
 package de.itemis.mosig.racecar.textconv;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 public class HtmlTextConverterTest {
 
+    private HtmlTextConverter underTest;
+
+    @Before
+    public void setUp() {
+        underTest = new HtmlTextConverter();
+    }
+
     @Test
     public void shouldConvertLeftAngelBracketsToHtmlCounterParts() {
-        HtmlTextConverter underTest = new HtmlTextConverter();
-
-        String result = underTest.convertToHtml("<" );
-
-        Assert.assertEquals("&lt;",result);
+        assertConvertResult("<","&lt;");
     }
 
     @Test
     public void shouldConvertRightAngelBracketsToHtmlCounterParts() {
-        HtmlTextConverter underTest = new HtmlTextConverter();
-
-        String result = underTest.convertToHtml(">" );
-
-        Assert.assertEquals("&gt;",result);
+        assertConvertResult(">","&gt;");
     }
 
     @Test
     public void shouldConvertAmpsToHtmlCounterParts() {
-        HtmlTextConverter underTest = new HtmlTextConverter();
-
-        String result = underTest.convertToHtml("&" );
-
-        Assert.assertEquals("&amp;",result);
+        assertConvertResult("&","&amp;");
     }
 
     @Test
     public void shouldConvertDoubleQuotesToHtmlCounterParts() {
-        HtmlTextConverter underTest = new HtmlTextConverter();
-
-        String result = underTest.convertToHtml("\"" );
-
-        Assert.assertEquals("&quot;",result);
+        assertConvertResult("\"","&quot;");
     }
 
     @Test
     public void shouldConvertSingleQuotesToHtmlCounterParts() {
-        HtmlTextConverter underTest = new HtmlTextConverter();
-
-        String result = underTest.convertToHtml("'" );
-
-        Assert.assertEquals("&#39;",result);
+        assertConvertResult("'","&#39;");
     }
 
     @Test
     public void shouldNotConvertNonEscapableCharacters() {
         String input = "A";
-        HtmlTextConverter underTest = new HtmlTextConverter();
 
-        String result = underTest.convertToHtml(input);
-
-        Assert.assertEquals(input,result);
+        assertConvertResult(input,input);
     }
 
     @Test
     public void shouldConvertMultipleCharactersAtOnce() {
         String input = "ABC\"\"\"\"&&DE&\"'FGH\n\tIJKL<<>>A>'";
         String expectedOutput = "ABC&quot;&quot;&quot;&quot;&amp;&amp;DE&amp;&quot;&#39;FGH\n\tIJKL&lt;&lt;&gt;&gt;A&gt;&#39;";
-        HtmlTextConverter underTest = new HtmlTextConverter();
 
+        assertConvertResult(input,expectedOutput);
+    }
+
+    /*
+     * ##### start private helper code #####
+     */
+
+    private void assertConvertResult(String input, String expectedOutput) {
         String result = underTest.convertToHtml(input);
-
         Assert.assertEquals(expectedOutput,result);
     }
 }
