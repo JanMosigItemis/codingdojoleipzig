@@ -53,4 +53,14 @@ public class HtmlTextConverterTest {
 
         Assert.assertEquals("&#39;",result);
     }
+
+    @Test
+    public void shouldNotConvertNonEscapableCharacters() {
+        String input = "A";
+        HtmlTextConverter underTest = new HtmlTextConverter();
+
+        String result = underTest.convertToHtml(input);
+
+        Assert.assertEquals(input,result);
+    }
 }
