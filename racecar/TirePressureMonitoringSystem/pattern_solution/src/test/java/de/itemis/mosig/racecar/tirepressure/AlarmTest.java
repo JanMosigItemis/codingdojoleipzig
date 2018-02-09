@@ -9,7 +9,7 @@ public class AlarmTest {
 
     @Test
     public void alarmShouldBeOffAfterConstruction() {
-        Alarm alarm = new Alarm();
+        Alarm alarm = new Alarm(new Sensor());
         assertEquals(false, alarm.isAlarmOn());
     }
 }
