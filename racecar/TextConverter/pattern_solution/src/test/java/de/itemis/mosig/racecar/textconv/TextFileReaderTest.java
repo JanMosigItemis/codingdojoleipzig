@@ -10,6 +10,6 @@ public class TextFileReaderTest {
     public void shouldReadContentsOfExistingFile() {
         TextFileReader underTest = new TextFileReader(Paths.get(""));
 
-        underTest.contents();
+        String result = underTest.contents();
     }
 }
