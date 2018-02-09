@@ -3,6 +3,7 @@ package de.itemis.mosig.racecar.textconv;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class HtmlTextConverter
 {
@@ -12,17 +13,14 @@ public class HtmlTextConverter
 
     }
 
-    public String convertToHtml() throws IOException{
-    
-	    BufferedReader reader = new BufferedReader(new FileReader(fullFilenameWithPath));
-	    
-	    String line = reader.readLine();
+    public String convertToHtml(String input) throws IOException{
+
+	    String line = null;
 	    String html = "";
 	    while (line != null)
 	    {
 	    	html += StringEscapeUtils.escapeHtml(line);
 	        html += "<br />";
-	        line = reader.readLine();
 	    }
 	    return html;
 
