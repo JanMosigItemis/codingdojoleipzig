@@ -16,7 +16,7 @@ public class HtmlTextConverter
     public String convertToHtml(String input) throws IOException{
 
 	    String line = null;
-	    String html = "";
+	    String html = "&lt;&gt;";
 	    while (line != null)
 	    {
 	    	html += StringEscapeUtils.escapeHtml(line);

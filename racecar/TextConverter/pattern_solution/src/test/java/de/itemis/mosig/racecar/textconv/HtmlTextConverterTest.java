@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 public class HtmlTextConverterTest {
+
     @Test
     public void shouldConverAngelBracketsToHtmlCounterParts() throws IOException {
         HtmlTextConverter underTest = new HtmlTextConverter();
