@@ -15,15 +15,11 @@ public class TextFileReader {
 
     public String contents() {
         String result = null;
-        if (Files.isReadable(filePath)) {
             try {
                 result = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Error while reading file '" + filePath + "'.", e);
             }
-        } else {
-            throw new RuntimeException("File '" + filePath + "' does not exist.");
-        }
         return result;
     }
 }
