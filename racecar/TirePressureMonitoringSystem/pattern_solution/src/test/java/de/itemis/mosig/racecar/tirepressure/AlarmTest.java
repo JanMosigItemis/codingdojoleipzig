@@ -17,7 +17,7 @@ public class AlarmTest {
     @Test
     public void alarmShouldGoOffIfPressureIsBelowInterval() {
         Sensor mockedSensor = Mockito.mock(Sensor.class);
-        Mockito.when(mockedSensor.popNextPressurePsiValue()).thenReturn(17d);
+        Mockito.when(mockedSensor.popNextPressurePsiValue()).thenReturn(16d);
 
         Alarm alarm = new Alarm(mockedSensor);
         alarm.check();
