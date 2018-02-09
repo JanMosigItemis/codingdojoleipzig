@@ -2,25 +2,34 @@ package de.itemis.mosig.racecar.tirepressure;
 
 public class Alarm
 {
-    private final double LowPressureThreshold = 17;
-    private final double HighPressureThreshold = 21;
+    private static final double LowPressureThreshold = 17;
+    private static final double HighPressureThreshold = 21;
 
-    Sensor sensor = new Sensor();
+    private final Sensor sensor;
 
-    boolean alarmOn = false;
+    private enum State {
+        ACTIVE,
+        INACTIVE
+    }
+    private State state;
+
+    public Alarm(Sensor sensor) {
+        this.sensor = sensor;
+        this.state = State.INACTIVE;
+    }
 
     public void check()
     {
         double psiPressureValue = sensor.popNextPressurePsiValue();
-
-        if (psiPressureValue < LowPressureThreshold || HighPressureThreshold < psiPressureValue)
-        {
-            alarmOn = true;
-        }
+        state = pressureIsNotInRange(psiPressureValue);
     }
 
     public boolean isAlarmOn()
     {
-        return alarmOn; 
+        return state == State.ACTIVE;
+    }
+
+    private State pressureIsNotInRange(double psiPressureValue) {
+        return (psiPressureValue < LowPressureThreshold || HighPressureThreshold < psiPressureValue)?State.ACTIVE:State.INACTIVE;
     }
 }
