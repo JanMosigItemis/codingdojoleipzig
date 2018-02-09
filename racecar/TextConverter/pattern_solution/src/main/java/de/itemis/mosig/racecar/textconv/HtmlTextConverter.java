@@ -21,8 +21,9 @@ public class HtmlTextConverter {
             String currentChar = input.charAt(i) + "";
             switch(currentChar) {
                 case "<" : result += "&lt;"; break;
-                case ">" : result += "&rt;"; break;
+                case ">" : result += "&gt;"; break;
                 case "&" : result += "&amp;"; break;
+                case "\"" : result += "&quot;"; break;
                 default : result += currentChar;
             }
         }
