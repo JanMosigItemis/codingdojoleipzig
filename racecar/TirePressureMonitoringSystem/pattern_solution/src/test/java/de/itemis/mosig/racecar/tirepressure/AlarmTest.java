@@ -43,6 +43,16 @@ public class AlarmTest {
         assertEquals(true, underTest.isAlarmOn());
     }
 
+    @Test
+    public void alarmShouldStopIfPressureIsBackWithinInterval() {
+        setupNextPressureValue(PRESSURE_INTERVAL_UPPER_BOUND + 1);
+        underTest.check();
+        setupNextPressureValue(PRESSURE_INTERVAL_UPPER_BOUND - 1);
+        underTest.check();
+
+        assertEquals(false, underTest.isAlarmOn());
+    }
+
     /*
      * #### start of private helper code ####
      */
