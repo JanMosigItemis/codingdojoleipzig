@@ -8,7 +8,7 @@ class StringEscapeUtils {
         output = output.replace("<", "&lt;");
         output = output.replace(">", "&gt;");
         output = output.replace("\"", "&quot;");
-        output = output.replace("'", "&quot;");
+        output = output.replace("'", "&#39;");
         return output;
     }
 
