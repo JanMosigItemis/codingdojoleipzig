@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.itemis.mosig.racecar</groupId>
-	<artifactId>textconverter_session_solution</artifactId>
+	<artifactId>textconverter_pattern_solution</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
