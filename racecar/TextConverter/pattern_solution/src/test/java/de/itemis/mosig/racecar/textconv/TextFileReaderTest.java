@@ -79,6 +79,7 @@ public class TextFileReaderTest {
         TextFileReader underTest = createUnderTest(tmpFilePath);
         Path result = underTest.getFilePath();
 
+        Assert.assertEquals(tmpFilePath, result);
     }
     /*
      * ##### start private helper code
