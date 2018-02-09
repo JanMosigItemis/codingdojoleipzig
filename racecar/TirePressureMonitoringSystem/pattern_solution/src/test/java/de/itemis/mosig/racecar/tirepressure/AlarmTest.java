@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 
 public class AlarmTest {
@@ -17,7 +19,7 @@ public class AlarmTest {
 
     @Before
     public void setUp() {
-        mockedSensor = Mockito.spy(new Sensor());
+        mockedSensor = Mockito.spy(new Sensor(new Random()));
         Mockito.when(mockedSensor.popNextPressurePsiValue()).thenCallRealMethod();
         underTest = createUnderTest(mockedSensor);
     }
