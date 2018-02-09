@@ -5,22 +5,21 @@ public class Alarm
     private final double LowPressureThreshold = 17;
     private final double HighPressureThreshold = 21;
 
-    Sensor sensor = new Sensor();
+    private final Sensor sensor;
 
-    boolean alarmOn = false;
+    private boolean alarmOn = false;
 
-    public void check()
-    {
-        double psiPressureValue = sensor.popNextPressurePsiValue();
-
-        if (psiPressureValue < LowPressureThreshold || HighPressureThreshold < psiPressureValue)
-        {
-            alarmOn = true;
-        }
+    public Alarm(Sensor sensor) {
+        this.sensor = sensor;
     }
 
-    public boolean isAlarmOn()
-    {
+    public void check() {
+        double psiPressureValue = sensor.popNextPressurePsiValue();
+
+        alarmOn = psiPressureValue < LowPressureThreshold || HighPressureThreshold < psiPressureValue;
+    }
+
+    public boolean isAlarmOn() {
         return alarmOn; 
     }
 }

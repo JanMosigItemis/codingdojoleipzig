@@ -10,7 +10,7 @@ public class HtmlTextConverter
 
     public HtmlTextConverter(String fullFilenameWithPath)
     {
-        this.fullFilenameWithPath = fullFilenameWithPath;
+    		this.fullFilenameWithPath = fullFilenameWithPath;
     }
 
     public String convertToHtml() throws IOException{
