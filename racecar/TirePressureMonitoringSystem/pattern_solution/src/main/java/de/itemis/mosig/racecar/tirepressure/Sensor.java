@@ -7,8 +7,8 @@ public class Sensor {
 
     private final Random basicRandomNumbersGenerator;
 
-    public Sensor() {
-        this.basicRandomNumbersGenerator = new Random();
+    public Sensor(Random rnd) {
+        this.basicRandomNumbersGenerator = rnd;
     }
 
 
