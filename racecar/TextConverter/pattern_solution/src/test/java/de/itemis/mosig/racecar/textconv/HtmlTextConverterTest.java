@@ -19,34 +19,34 @@ public class HtmlTextConverterTest {
 
     @Test
     public void shouldConvertLeftAngelBracketsToHtmlCounterParts() {
-        assertConvertResult("<","&lt;");
+        assertConvertResult("<", "&lt;");
     }
 
     @Test
     public void shouldConvertRightAngelBracketsToHtmlCounterParts() {
-        assertConvertResult(">","&gt;");
+        assertConvertResult(">", "&gt;");
     }
 
     @Test
     public void shouldConvertAmpsToHtmlCounterParts() {
-        assertConvertResult("&","&amp;");
+        assertConvertResult("&", "&amp;");
     }
 
     @Test
     public void shouldConvertDoubleQuotesToHtmlCounterParts() {
-        assertConvertResult("\"","&quot;");
+        assertConvertResult("\"", "&quot;");
     }
 
     @Test
     public void shouldConvertSingleQuotesToHtmlCounterParts() {
-        assertConvertResult("'","&#39;");
+        assertConvertResult("'", "&#39;");
     }
 
     @Test
     public void shouldNotConvertNonEscapableCharacters() {
         String input = "A";
 
-        assertConvertResult(input,input);
+        assertConvertResult(input, input);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class HtmlTextConverterTest {
         String input = "ABC\"\"\"\"&&DE&\"'FGH\n\tIJKL<<>>A>'";
         String expectedOutput = "ABC&quot;&quot;&quot;&quot;&amp;&amp;DE&amp;&quot;&#39;FGH\n\tIJKL&lt;&lt;&gt;&gt;A&gt;&#39;";
 
-        assertConvertResult(input,expectedOutput);
+        assertConvertResult(input, expectedOutput);
     }
 
     /*
@@ -65,6 +65,6 @@ public class HtmlTextConverterTest {
         Mockito.when(fileReaderMock.contents()).thenReturn(input);
 
         String result = underTest.convertToHtml();
-        Assert.assertEquals(expectedOutput,result);
+        Assert.assertEquals(expectedOutput, result);
     }
 }
