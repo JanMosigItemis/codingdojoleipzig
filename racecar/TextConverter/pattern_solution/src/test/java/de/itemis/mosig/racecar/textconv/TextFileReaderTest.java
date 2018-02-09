@@ -6,6 +6,6 @@ public class TextFileReaderTest {
 
     @Test
     public void shouldReadContentsOfExistingFile() {
-        new TextFileReader();
+        new TextFileReader(Path filePath);
     }
 }
