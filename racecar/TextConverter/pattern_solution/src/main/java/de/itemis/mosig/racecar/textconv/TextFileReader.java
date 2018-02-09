@@ -14,10 +14,14 @@ public class TextFileReader {
     }
 
     public String contents() {
-        try {
-            return new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (Files.isReadable(filePath)) {
+            try {
+                return new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new RuntimeException("File '" + filePath + "' does not exist.");
         }
         return null;
     }
