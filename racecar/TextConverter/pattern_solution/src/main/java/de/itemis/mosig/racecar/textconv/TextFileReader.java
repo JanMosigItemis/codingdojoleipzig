@@ -22,4 +22,8 @@ public class TextFileReader {
             }
         return result;
     }
+
+    public Path getFilePath() {
+        return null;
+    }
 }

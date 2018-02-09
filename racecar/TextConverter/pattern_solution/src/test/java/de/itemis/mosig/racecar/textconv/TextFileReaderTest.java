@@ -77,7 +77,8 @@ public class TextFileReaderTest {
     @Test
     public void shouldReturnFilePath() {
         TextFileReader underTest = createUnderTest(tmpFilePath);
-        underTest.getFilePath();
+        Path result = underTest.getFilePath();
+
     }
     /*
      * ##### start private helper code
