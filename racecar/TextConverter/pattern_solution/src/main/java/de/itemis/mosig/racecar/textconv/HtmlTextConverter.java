@@ -8,9 +8,8 @@ public class HtmlTextConverter
 {
     private String fullFilenameWithPath;
 
-    public HtmlTextConverter(String fullFilenameWithPath)
-    {
-    		this.fullFilenameWithPath = fullFilenameWithPath;
+    public HtmlTextConverter() {
+
     }
 
     public String convertToHtml() throws IOException{
