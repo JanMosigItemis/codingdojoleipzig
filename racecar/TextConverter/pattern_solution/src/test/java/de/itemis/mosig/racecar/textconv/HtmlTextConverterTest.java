@@ -63,4 +63,15 @@ public class HtmlTextConverterTest {
 
         Assert.assertEquals(input,result);
     }
+
+    @Test
+    public void shouldConvertMultipleCharactersAtOnce() {
+        String input = "ABC\"\"\"\"&&DE&\"'FGH\n\tIJKL<<>>A>'";
+        String expectedOutput = "ABC&quot;&quot;&quot;&quot;&amp;&amp;DE&amp;&quot;&#39;FGH\n\tIJKL&lt;&lt;&gt;&gt;A&gt;&#39;";
+        HtmlTextConverter underTest = new HtmlTextConverter();
+
+        String result = underTest.convertToHtml(input);
+
+        Assert.assertEquals(expectedOutput,result);
+    }
 }
