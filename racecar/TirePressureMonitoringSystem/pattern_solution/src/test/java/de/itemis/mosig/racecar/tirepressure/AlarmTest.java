@@ -1,6 +1,7 @@
 package de.itemis.mosig.racecar.tirepressure;
 
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -8,19 +9,40 @@ import static org.junit.Assert.assertEquals;
 
 public class AlarmTest {
 
+    private static final double PRESSURE_INTERVAL_LOWER_BOUND = 17d;
+
+    private Sensor mockedSensor;
+    private Alarm underTest;
+
+    @Before
+    public void setUp() {
+        mockedSensor = Mockito.mock(Sensor.class);
+        Mockito.when(mockedSensor.popNextPressurePsiValue()).thenCallRealMethod();
+        underTest = createUnderTest(mockedSensor);
+    }
+
     @Test
     public void alarmShouldBeOffAfterConstruction() {
-        Alarm alarm = new Alarm(new Sensor());
-        assertEquals(false, alarm.isAlarmOn());
+        assertEquals(false, underTest.isAlarmOn());
     }
 
     @Test
     public void alarmShouldGoOffIfPressureIsBelowInterval() {
-        Sensor mockedSensor = Mockito.mock(Sensor.class);
-        Mockito.when(mockedSensor.popNextPressurePsiValue()).thenReturn(16d);
+        setupNextPressureValue(PRESSURE_INTERVAL_LOWER_BOUND - 1);
 
-        Alarm alarm = new Alarm(mockedSensor);
-        alarm.check();
-        assertEquals(true, alarm.isAlarmOn());
+        underTest.check();
+        assertEquals(true, underTest.isAlarmOn());
+    }
+
+    /*
+     * #### start of private helper code ####
+     */
+
+    private Alarm createUnderTest(Sensor sensor) {
+        return new Alarm(sensor);
+    }
+
+    private void setupNextPressureValue(double nextValue) {
+        Mockito.when(mockedSensor.popNextPressurePsiValue()).thenReturn(nextValue);
     }
 }
