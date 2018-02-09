@@ -7,6 +7,8 @@ import org.junit.Test;
 public class HtmlTextConverterTest {
     @Test
     public void shouldConverAngelBracketsToHtmlCounterParts() {
-        new HtmlTextConverter();
+        HtmlTextConverter underTest = new HtmlTextConverter();
+
+        underTest.convertToHtml("<>");
     }
 }
