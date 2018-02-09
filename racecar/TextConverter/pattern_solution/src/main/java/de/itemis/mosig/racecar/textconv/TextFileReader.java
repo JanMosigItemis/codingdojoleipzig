@@ -7,4 +7,8 @@ public class TextFileReader {
     public TextFileReader(Path filePath) {
 
     }
+
+    public void contents() {
+
+    }
 }
