@@ -10,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class AlarmTest {
 
     private static final double PRESSURE_INTERVAL_LOWER_BOUND = 17d;
+    private static final double PRESSURE_INTERVAL_UPPER_BOUND = 21d;
 
     private Sensor mockedSensor;
     private Alarm underTest;
@@ -36,7 +37,7 @@ public class AlarmTest {
 
     @Test
     public void alarmShouldGoOffIfPressureIsAboveInterval() {
-        setupNextPressureValue(21 + 1);
+        setupNextPressureValue(PRESSURE_INTERVAL_UPPER_BOUND + 1);
 
         underTest.check();
         assertEquals(true, underTest.isAlarmOn());
