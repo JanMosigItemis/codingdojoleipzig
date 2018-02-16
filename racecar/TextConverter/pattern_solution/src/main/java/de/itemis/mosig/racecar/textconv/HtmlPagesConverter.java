@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HtmlPagesConverter {
+    private static final String PAGE_BREAK = "PAGE_BREAK";
+    private static final String HTML_LINE_BREAK = "<br />";
 
-    private String filename;
-    private List<Integer> breaks = new ArrayList<>();
+    private final String filename;
+    private final List<Integer> breaks = new ArrayList<>();
 
     public HtmlPagesConverter(String filename) throws IOException {
         this.filename = filename;
@@ -20,30 +22,30 @@ public class HtmlPagesConverter {
         String line = reader.readLine();
         while (line != null) {
             cumulativeCharCount += line.length() + 1; // add one for the newline
-            if (line.contains("PAGE_BREAK")) {
-                int page_break_position = cumulativeCharCount;
-                breaks.add(page_break_position);
+            if (line.contains(PAGE_BREAK)) {
+                int pageBreakPosition = cumulativeCharCount;
+                breaks.add(pageBreakPosition);
             }
             line = reader.readLine();
         }
         reader.close();
     }
 
-    public String getHtmlPage(int page) throws IOException {
+    public String getHtmlPage(int pageNbr) throws IOException {
         String result = null;
 
-        if (page > -1 && page < breaks.size()) {
+        if (isValid(pageNbr)) {
             BufferedReader reader = new BufferedReader(new FileReader(this.filename));
-            reader.skip(breaks.get(page));
+            reader.skip(breaks.get(pageNbr));
             StringBuffer htmlPage = new StringBuffer();
             String line = reader.readLine();
             while (line != null) {
-                if (line.contains("PAGE_BREAK")) {
+                if (line.contains(PAGE_BREAK)) {
                     break;
                 }
 
                 htmlPage.append(StringEscapeUtils.escapeHtml(line));
-                htmlPage.append("<br />");
+                htmlPage.append(HTML_LINE_BREAK);
                 line = reader.readLine();
             }
             reader.close();
@@ -51,6 +53,10 @@ public class HtmlPagesConverter {
         }
 
         return result;
+    }
+
+    private boolean isValid(int pageNbr) {
+        return pageNbr > -1 && pageNbr < breaks.size();
     }
 
     public String getFilename() {
