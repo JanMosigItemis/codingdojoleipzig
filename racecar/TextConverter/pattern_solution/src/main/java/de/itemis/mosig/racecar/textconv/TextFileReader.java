@@ -31,7 +31,7 @@ public class TextFileReader {
     }
 
     public List<String> contentsAsList() {
-        List<String> result = Splitter.onPattern("[" + NEWLINE + "|" + CARRIAGE_RETURN + "]").splitToList(contents());
+        List<String> result = Splitter.onPattern("\\r?\\n|\\r").splitToList(contents());
         return Collections.unmodifiableList(result);
     }
 
