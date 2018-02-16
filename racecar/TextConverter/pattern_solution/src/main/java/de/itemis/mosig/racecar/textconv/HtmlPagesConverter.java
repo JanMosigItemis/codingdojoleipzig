@@ -13,6 +13,10 @@ public class HtmlPagesConverter {
     private final String filename;
     private final List<Integer> breaks = new ArrayList<>();
 
+    public HtmlPagesConverter(List<String> fileContents) {
+        filename = null;
+    }
+
     public HtmlPagesConverter(String filename) throws IOException {
         this.filename = filename;
 
