@@ -1,5 +1,7 @@
 package de.itemis.mosig.racecar.textconv;
 
+import com.google.common.base.Splitter;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,11 +9,10 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 
-import static com.google.common.base.Splitter.on;
-
 public class TextFileReader {
 
     private static final String NEWLINE = "\n";
+    private static final String CARRIAGE_RETURN = "\r";
 
     private final Path filePath;
 
@@ -30,7 +31,7 @@ public class TextFileReader {
     }
 
     public List<String> contentsAsList() {
-        List<String> result = on(NEWLINE).splitToList(contents());
+        List<String> result = Splitter.onPattern("[" + NEWLINE + "|" + CARRIAGE_RETURN + "]").splitToList(contents());
         return Collections.unmodifiableList(result);
     }
 
