@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -117,6 +118,10 @@ public class HtmlPagesConverterTest {
         }
 
         return result;
+    }
+
+    private HtmlPagesConverter prepareUnderTest(List<String> fileContents) {
+        return new HtmlPagesConverter(fileContents);
     }
 
     private HtmlPagesConverter prepareUnderTest(String resourceName) {
