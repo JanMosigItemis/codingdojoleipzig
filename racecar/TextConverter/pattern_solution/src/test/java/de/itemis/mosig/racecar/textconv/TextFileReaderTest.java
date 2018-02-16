@@ -67,6 +67,17 @@ public class TextFileReaderTest {
     }
 
     @Test
+    public void shouldCreateOneListEntryPerCarriageReturn() {
+        List<String> expectedResult = Lists.newArrayList("one", "two", "three");
+        writeToTestFile(String.join("\r", expectedResult));
+        TextFileReader underTest = createUnderTest(tmpFilePath);
+
+        List<String> actualResult = underTest.contentsAsList();
+
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void shouldReadContentsOfEmptyFile() {
         TextFileReader underTest = createUnderTest(tmpFilePath);
 
