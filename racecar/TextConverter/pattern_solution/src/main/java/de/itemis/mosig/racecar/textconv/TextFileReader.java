@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.google.common.base.Splitter.on;
+
 public class TextFileReader {
+
+    private static final String NEWLINE = "\n";
 
     private final Path filePath;
 
@@ -27,8 +30,7 @@ public class TextFileReader {
     }
 
     public List<String> contentsAsList() {
-        List<String> result = new ArrayList<>();
-        result.add(contents());
+        List<String> result = on(NEWLINE).splitToList(contents());
         return Collections.unmodifiableList(result);
     }
 
