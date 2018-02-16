@@ -56,18 +56,6 @@ public class TextFileReaderTest {
     }
 
     @Test
-    public void shouldReadContentsOfExistingFileIntoList() {
-        String expectedContent = generateRandomString();
-        writeToTestFile(expectedContent);
-        TextFileReader underTest = createUnderTest(tmpFilePath);
-
-        List<String> resultList = underTest.contentsAsList();
-
-        String result = String.join("", resultList);
-        Assert.assertEquals(expectedContent, result);
-    }
-
-    @Test
     public void shouldCreateOneListEntryPerNewLine() {
         List<String> expectedResult = Lists.newArrayList("one", "two", "three");
         writeToTestFile(String.join("\n", expectedResult));
