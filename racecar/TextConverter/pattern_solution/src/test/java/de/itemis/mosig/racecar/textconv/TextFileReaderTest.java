@@ -1,5 +1,7 @@
 package de.itemis.mosig.racecar.textconv;
 
+import com.google.common.collect.Lists;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -63,6 +65,17 @@ public class TextFileReaderTest {
 
         String result = String.join("", resultList);
         Assert.assertEquals(expectedContent, result);
+    }
+
+    @Test
+    public void shouldCreateOneListEntryPerNewLine() {
+        List<String> expectedResult = Lists.newArrayList("one", "two", "three");
+        writeToTestFile(String.join("\n", expectedResult));
+        TextFileReader underTest = createUnderTest(tmpFilePath);
+
+        List<String> actualResult = underTest.contentsAsList();
+
+        Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
