@@ -10,12 +10,14 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
 public class HtmlPagesConverterTest {
+
+    private static final String PAGE_BREAK = "PAGE_BREAK";
 
     private Set<Path> pathsOfTestFiles = new HashSet<>();
 
@@ -25,8 +27,8 @@ public class HtmlPagesConverterTest {
     }
 
     @Test
-    public void shouldInsertOneBrForEachPageBreakEncounteredAndOneForTheLastLine() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTest("multiple_page_breaks.txt");
+    public void shouldInsertOneBrForEachPageBreakEncounteredAndOneForTheLastLine() {
+        HtmlPagesConverter underTest = prepareUnderTest("Hello", "World", "!");
 
         assertPageContents(underTest, "Hello<br />", "World<br />", "!<br />");
     }
@@ -120,8 +122,8 @@ public class HtmlPagesConverterTest {
         return result;
     }
 
-    private HtmlPagesConverter prepareUnderTest(List<String> fileContents) {
-        return new HtmlPagesConverter(fileContents);
+    private HtmlPagesConverter prepareUnderTest(String... fileContents) {
+        return new HtmlPagesConverter(Arrays.asList(fileContents));
     }
 
     private HtmlPagesConverter prepareUnderTest(String resourceName) {
