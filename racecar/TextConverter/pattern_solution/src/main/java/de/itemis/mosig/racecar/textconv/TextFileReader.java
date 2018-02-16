@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TextFileReader {
 
@@ -15,12 +18,18 @@ public class TextFileReader {
 
     public String contents() {
         String result = null;
-            try {
-                result = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                throw new RuntimeException("Error while reading file '" + filePath + "'.", e);
-            }
+        try {
+            result = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Error while reading file '" + filePath + "'.", e);
+        }
         return result;
+    }
+
+    public List<String> contentsAsList() {
+        List<String> result = new ArrayList<>();
+        result.add(contents());
+        return Collections.unmodifiableList(result);
     }
 
     public Path getFilePath() {

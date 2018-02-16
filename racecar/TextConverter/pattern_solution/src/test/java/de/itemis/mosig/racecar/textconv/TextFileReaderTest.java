@@ -9,11 +9,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Random;
 
 public class TextFileReaderTest {
 
-    private static final String[] VALID_CHARACTERS = new String[] {"\n","\t","A","B","C","D","E","F","G","H","I","J","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+    private static final String[] VALID_CHARACTERS = new String[]{"\n", "\t", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private static int FILE_SIZE_IN_CHARACTERS = 100;
 
     private Random random;
@@ -24,7 +25,7 @@ public class TextFileReaderTest {
         random = new Random();
 
         try {
-            tmpFilePath = Files.createTempFile(this.getClass().getSimpleName(),"txt");
+            tmpFilePath = Files.createTempFile(this.getClass().getSimpleName(), "txt");
         } catch (IOException e) {
             Assert.fail("Could not create temporary test file: " + e.getMessage());
         }
@@ -49,6 +50,18 @@ public class TextFileReaderTest {
 
         String result = underTest.contents();
 
+        Assert.assertEquals(expectedContent, result);
+    }
+
+    @Test
+    public void shouldReadContentsOfExistingFileIntoList() {
+        String expectedContent = generateRandomString();
+        writeToTestFile(expectedContent);
+        TextFileReader underTest = createUnderTest(tmpFilePath);
+
+        List<String> resultList = underTest.contentsAsList();
+
+        String result = String.join("", resultList);
         Assert.assertEquals(expectedContent, result);
     }
 
@@ -101,7 +114,7 @@ public class TextFileReaderTest {
         int nbrOfCharacters = random.nextInt(FILE_SIZE_IN_CHARACTERS);
 
         String result = "";
-        for(int i=0;i<nbrOfCharacters;i++) {
+        for (int i = 0; i < nbrOfCharacters; i++) {
             int rndCharacterIndex = random.nextInt(VALID_CHARACTERS.length);
             result += VALID_CHARACTERS[rndCharacterIndex];
         }
