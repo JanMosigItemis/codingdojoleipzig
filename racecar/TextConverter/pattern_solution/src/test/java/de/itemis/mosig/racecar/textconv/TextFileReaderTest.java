@@ -17,7 +17,6 @@ import java.util.Random;
 public class TextFileReaderTest {
 
     private static final String[] VALID_CHARACTERS = new String[]{"\n", "\t", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    private static int FILE_SIZE_IN_CHARACTERS = 100;
 
     private Random random;
     private Path tmpFilePath;
@@ -134,14 +133,16 @@ public class TextFileReaderTest {
     }
 
     private String generateRandomString() {
-        int nbrOfCharacters = random.nextInt(FILE_SIZE_IN_CHARACTERS);
+        int fileSizeInCharacters = 100;
 
-        String result = "";
+        int nbrOfCharacters = random.nextInt(fileSizeInCharacters);
+
+        StringBuilder resultBuilder = new StringBuilder();
         for (int i = 0; i < nbrOfCharacters; i++) {
             int rndCharacterIndex = random.nextInt(VALID_CHARACTERS.length);
-            result += VALID_CHARACTERS[rndCharacterIndex];
+            resultBuilder.append(VALID_CHARACTERS[rndCharacterIndex]);
         }
 
-        return result;
+        return resultBuilder.toString();
     }
 }

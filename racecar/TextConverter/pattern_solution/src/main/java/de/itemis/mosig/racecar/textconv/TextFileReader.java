@@ -11,9 +11,6 @@ import java.util.List;
 
 public class TextFileReader {
 
-    private static final String NEWLINE = "\n";
-    private static final String CARRIAGE_RETURN = "\r";
-
     private final Path filePath;
 
     public TextFileReader(Path filePath) {
