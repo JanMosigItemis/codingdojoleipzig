@@ -13,37 +13,57 @@ public class HtmlPagesConverter {
         List<String> rawContents = new ArrayList<>(fileContents);
         this.contents = new ArrayList<>();
 
-        if (!rawContents.isEmpty() && rawContents.get(0).equals(PAGE_BREAK)) {
-            rawContents.add(0, "");
-        }
-        if (!rawContents.isEmpty() && rawContents.get(rawContents.size() - 1).equals(PAGE_BREAK)) {
-            rawContents.add("");
-        }
+        handleSpecialPageBreakCases(rawContents);
+        copyLineIfItIsNoPageBreak(rawContents);
+    }
 
+    private void copyLineIfItIsNoPageBreak(List<String> rawContents) {
         for (int i = 0; i < rawContents.size(); i++) {
             String line = rawContents.get(i);
             if (line.equals(PAGE_BREAK)) {
-                if (i < rawContents.size() - 1 && rawContents.get(i + 1).equals(PAGE_BREAK)) {
+                if (nextLineContainsPageBreak(rawContents, i)) {
                     contents.add("");
                 }
-                continue;
+            } else {
+                contents.add(line);
             }
-            contents.add(line);
+        }
+    }
+
+    private void handleSpecialPageBreakCases(List<String> rawContents) {
+        if (firstLineContainsPageBreak(rawContents)) {
+            rawContents.add(0, "");
+        }
+
+        if (lastLineContainsPageBreak(rawContents)) {
+            rawContents.add("");
         }
     }
 
     public String getHtmlPage(int pageNbr) {
-        if (pageNbr < contents.size()) {
-            if (pageNbr > -1) {
-                return noLineBreakAfterEmptyPage(contents.get(pageNbr));
-            } else {
-                return null;
-            }
+        if (pageNbrInRange(pageNbr)) {
+            return noLineBreakAfterEmptyPage(contents.get(pageNbr));
         } else if (firstPageOfEmptyContentIsRequested(pageNbr)) {
             return "";
-        } else {
-            return null;
         }
+
+        return null;
+    }
+
+    private boolean pageNbrInRange(int pageNbr) {
+        return pageNbr > -1 && pageNbr < contents.size();
+    }
+
+    private boolean nextLineContainsPageBreak(List<String> lines, int currentLineNbr) {
+        return currentLineNbr < lines.size() - 1 && lines.get(currentLineNbr + 1).equals(PAGE_BREAK);
+    }
+
+    private boolean lastLineContainsPageBreak(List<String> lines) {
+        return !lines.isEmpty() && lines.get(lines.size() - 1).equals(PAGE_BREAK);
+    }
+
+    private boolean firstLineContainsPageBreak(List<String> lines) {
+        return !lines.isEmpty() && lines.get(0).equals(PAGE_BREAK);
     }
 
     private String noLineBreakAfterEmptyPage(String pageContent) {
