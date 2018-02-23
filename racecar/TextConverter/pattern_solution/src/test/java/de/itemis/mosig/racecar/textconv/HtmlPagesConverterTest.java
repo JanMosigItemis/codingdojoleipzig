@@ -63,10 +63,17 @@ public class HtmlPagesConverterTest {
     }
 
     @Test
-    public void shouldReturnPageBreakCountPlus1EmptyPagesIfFileContainsOddNumberOfPageBreaksOnly() throws IOException {
+    public void onOddNumberOfPageBreaksShouldReturnPageBreakCountPlusOneEmptyPages() throws IOException {
         HtmlPagesConverter underTest = prepareUnderTest(PAGE_BREAK, PAGE_BREAK, PAGE_BREAK);
 
         assertPageContents(underTest, "", "", "", "");
+    }
+
+    @Test
+    public void onEvenNumberOfPageBreaksShouldReturnPageBreakCountPlusOneEmptyPages() throws IOException {
+        HtmlPagesConverter underTest = prepareUnderTest(PAGE_BREAK, PAGE_BREAK);
+
+        assertPageContents(underTest, "", "", "");
     }
 
     @Test
