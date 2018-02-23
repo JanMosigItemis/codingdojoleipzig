@@ -63,8 +63,8 @@ public class HtmlPagesConverterTest {
     }
 
     @Test
-    public void shouldReturnFourEmptyPagesIfFileContainsThreePageBreaks() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTestOld("only_multiple_page_breaks.txt");
+    public void shouldReturnPageBreakCountPlus1EmptyPagesIfFileContainsOddNumberOfPageBreaksOnly() throws IOException {
+        HtmlPagesConverter underTest = prepareUnderTest(PAGE_BREAK, PAGE_BREAK, PAGE_BREAK);
 
         assertPageContents(underTest, "", "", "", "");
     }
