@@ -77,17 +77,6 @@ public class HtmlPagesConverterTest {
     }
 
     @Test
-    public void shouldReturnFileNameIfFileExists() throws IOException {
-        Path testFilePath = prepareTestFile("multiple_page_breaks.txt");
-        String expectedResult = testFilePath.toString();
-        HtmlPagesConverter underTest = new HtmlPagesConverter(expectedResult);
-
-        String result = underTest.getFilename();
-
-        Assert.assertEquals(expectedResult, result);
-    }
-
-    @Test
     public void shouldThrowIoExceptionIfFileDoesNotExist() {
         String nonExistingFileName = "this_file_does_not_exist";
         try {

@@ -128,9 +128,4 @@ public class HtmlPagesConverter {
     private boolean isValid(int pageNbr) {
         return pageNbr > -1 && pageNbr < breaks.size();
     }
-
-    public String getFilename() {
-        return this.filename;
-    }
-
 }
