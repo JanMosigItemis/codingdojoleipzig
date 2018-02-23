@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HtmlPagesConverter {
     private static final String PAGE_BREAK = "PAGE_BREAK";
@@ -12,14 +13,17 @@ public class HtmlPagesConverter {
 
     private final String filename;
     private final List<Integer> breaks = new ArrayList<>();
-    private final List<String> contents;
+    private final List<String> rawContents;
+    private List<String> contents = new ArrayList<>();
 
     public HtmlPagesConverter(List<String> fileContents) {
         filename = null;
-        this.contents = new ArrayList<>(fileContents);
+        this.rawContents = new ArrayList<>(fileContents);
+        this.contents = this.rawContents.stream().filter(line -> !line.equals(PAGE_BREAK)).collect(Collectors.toList());
     }
 
     public HtmlPagesConverter(String filename) throws IOException {
+        this.rawContents = null;
         this.contents = null;
         this.filename = filename;
 
@@ -43,15 +47,15 @@ public class HtmlPagesConverter {
             if (pageNbr < contents.size()) {
                 switch (pageNbr) {
                     case 0:
-                        return contents.get(0) + HTML_LINE_BREAK;
+                        return noLineBreakAfterEmptyPage(contents.get(pageNbr));
                     case 1:
-                        return "World" + HTML_LINE_BREAK;
+                        return noLineBreakAfterEmptyPage(contents.get(pageNbr));
                     case 2:
-                        return "!" + HTML_LINE_BREAK;
+                        return noLineBreakAfterEmptyPage(contents.get(pageNbr));
                     default:
                         return null;
                 }
-            } else if (firstPageOfEmptyContentIsRequested(pageNbr)) {
+            } else if (firstPageOfEmptyContentIsRequested(pageNbr) || pageAfterLastPageIsRequestedAndLastPageContainsAPageBreak(pageNbr)) {
                 return "";
             } else {
                 return null;
@@ -59,6 +63,27 @@ public class HtmlPagesConverter {
         } else {
             return internalGetHtmlPageFromFile(pageNbr);
         }
+    }
+
+    private String ignorePageBreaks(int pageNbr) {
+        if (pageNbr < rawContents.size()) {
+            if (rawContents.get(pageNbr).equals(PAGE_BREAK)) {
+                return ignorePageBreaks(++pageNbr);
+            } else {
+                return rawContents.get(pageNbr);
+            }
+        } else {
+            return "";
+        }
+    }
+
+    private boolean pageAfterLastPageIsRequestedAndLastPageContainsAPageBreak(int pageNbr) {
+        int lastPageNbr = rawContents.size() - 1;
+        return pageNbr == (lastPageNbr + 1) && rawContents.get(lastPageNbr).equals(PAGE_BREAK);
+    }
+
+    private String noLineBreakAfterEmptyPage(String pageContent) {
+        return pageContent.isEmpty() ? pageContent : pageContent + HTML_LINE_BREAK;
     }
 
     private boolean firstPageOfEmptyContentIsRequested(int pageNbr) {
