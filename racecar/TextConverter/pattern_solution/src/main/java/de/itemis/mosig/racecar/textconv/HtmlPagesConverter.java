@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HtmlPagesConverter {
     private static final String PAGE_BREAK = "PAGE_BREAK";
@@ -19,7 +18,24 @@ public class HtmlPagesConverter {
     public HtmlPagesConverter(List<String> fileContents) {
         filename = null;
         this.rawContents = new ArrayList<>(fileContents);
-        this.contents = this.rawContents.stream().filter(line -> !line.equals(PAGE_BREAK)).collect(Collectors.toList());
+
+        if (!rawContents.isEmpty() && rawContents.get(0).equals(PAGE_BREAK)) {
+            rawContents.add(0, "");
+        }
+        if (!rawContents.isEmpty() && rawContents.get(rawContents.size() - 1).equals(PAGE_BREAK)) {
+            rawContents.add("");
+        }
+
+        for (int i = 0; i < rawContents.size(); i++) {
+            String line = rawContents.get(i);
+            if (line.equals(PAGE_BREAK)) {
+                if (i < rawContents.size() - 1 && rawContents.get(i + 1).equals(PAGE_BREAK)) {
+                    contents.add("");
+                }
+                continue;
+            }
+            contents.add(line);
+        }
     }
 
     public HtmlPagesConverter(String filename) throws IOException {
@@ -45,17 +61,12 @@ public class HtmlPagesConverter {
     public String getHtmlPage(int pageNbr) throws IOException {
         if (filename == null) {
             if (pageNbr < contents.size()) {
-                switch (pageNbr) {
-                    case 0:
-                        return noLineBreakAfterEmptyPage(contents.get(pageNbr));
-                    case 1:
-                        return noLineBreakAfterEmptyPage(contents.get(pageNbr));
-                    case 2:
-                        return noLineBreakAfterEmptyPage(contents.get(pageNbr));
-                    default:
-                        return null;
+                if (pageNbr > -1) {
+                    return noLineBreakAfterEmptyPage(contents.get(pageNbr));
+                } else {
+                    return null;
                 }
-            } else if (firstPageOfEmptyContentIsRequested(pageNbr) || pageAfterLastPageIsRequestedAndLastPageContainsAPageBreak(pageNbr)) {
+            } else if (firstPageOfEmptyContentIsRequested(pageNbr)) {
                 return "";
             } else {
                 return null;
