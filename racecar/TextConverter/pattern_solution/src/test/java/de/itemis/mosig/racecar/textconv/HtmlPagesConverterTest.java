@@ -49,7 +49,7 @@ public class HtmlPagesConverterTest {
 
     @Test
     public void shouldReturnEmptyStringIfPageIsNegative() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTestOld("empty.txt");
+        HtmlPagesConverter underTest = prepareUnderTest("");
 
         String result = underTest.getHtmlPage(-1);
         Assert.assertNull(getPage(underTest, -1));
