@@ -51,7 +51,7 @@ public class HtmlPagesConverter {
                     default:
                         return null;
                 }
-            } else if (contents.isEmpty() && pageNbr == 0) {
+            } else if (firstPageOfEmptyContentIsRequested(pageNbr)) {
                 return "";
             } else {
                 return null;
@@ -59,6 +59,10 @@ public class HtmlPagesConverter {
         } else {
             return internalGetHtmlPageFromFile(pageNbr);
         }
+    }
+
+    private boolean firstPageOfEmptyContentIsRequested(int pageNbr) {
+        return contents.isEmpty() && pageNbr == 0;
     }
 
     private String internalGetHtmlPageFromFile(int pageNbr) throws IOException {
