@@ -43,11 +43,11 @@ public class HtmlPagesConverter {
             if (pageNbr < contents.size()) {
                 switch (pageNbr) {
                     case 0:
-                        return contents.get(0) + "<br />";
+                        return contents.get(0) + HTML_LINE_BREAK;
                     case 1:
-                        return "World<br />";
+                        return "World" + HTML_LINE_BREAK;
                     case 2:
-                        return "!<br />";
+                        return "!" + HTML_LINE_BREAK;
                     default:
                         return null;
                 }
