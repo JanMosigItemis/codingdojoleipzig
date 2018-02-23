@@ -51,6 +51,8 @@ public class HtmlPagesConverter {
                     default:
                         return null;
                 }
+            } else if (contents.isEmpty() && pageNbr == 0) {
+                return "";
             } else {
                 return null;
             }
