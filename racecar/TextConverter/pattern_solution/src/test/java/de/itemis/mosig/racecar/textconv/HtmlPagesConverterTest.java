@@ -28,7 +28,7 @@ public class HtmlPagesConverterTest {
 
     @Test
     public void shouldInsertOneBrForEachPageBreakEncounteredAndOneForTheLastLine() {
-        HtmlPagesConverter underTest = prepareUnderTest("Hello", "World", "!");
+        HtmlPagesConverter underTest = prepareUnderTest("Hello", PAGE_BREAK, "World", PAGE_BREAK, "!");
 
         assertPageContents(underTest, "Hello<br />", "World<br />", "!<br />");
     }
@@ -56,8 +56,8 @@ public class HtmlPagesConverterTest {
     }
 
     @Test
-    public void shouldReturnTwoEmptyPagesIfFileContainsOnePageBreak() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTestOld("only_one_page_break.txt");
+    public void shouldReturnTwoEmptyPagesIfFileContainsOnePageBreakAndNothingElse() throws IOException {
+        HtmlPagesConverter underTest = prepareUnderTest(PAGE_BREAK);
 
         assertPageContents(underTest, "", "");
     }
