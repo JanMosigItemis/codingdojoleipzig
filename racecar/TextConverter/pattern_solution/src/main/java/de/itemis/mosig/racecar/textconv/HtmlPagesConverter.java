@@ -12,12 +12,15 @@ public class HtmlPagesConverter {
 
     private final String filename;
     private final List<Integer> breaks = new ArrayList<>();
+    private final List<String> contents;
 
     public HtmlPagesConverter(List<String> fileContents) {
         filename = null;
+        this.contents = new ArrayList<>(fileContents);
     }
 
     public HtmlPagesConverter(String filename) throws IOException {
+        this.contents = null;
         this.filename = filename;
 
         this.breaks.add(0);
@@ -36,6 +39,23 @@ public class HtmlPagesConverter {
     }
 
     public String getHtmlPage(int pageNbr) throws IOException {
+        if (filename == null) {
+            switch (pageNbr) {
+                case 0:
+                    return "Hello<br />";
+                case 1:
+                    return "World<br />";
+                case 2:
+                    return "!<br />";
+                default:
+                    return null;
+            }
+        } else {
+            return internalGetHtmlPageFromFile(pageNbr);
+        }
+    }
+
+    private String internalGetHtmlPageFromFile(int pageNbr) throws IOException {
         String result = null;
 
         if (isValid(pageNbr)) {

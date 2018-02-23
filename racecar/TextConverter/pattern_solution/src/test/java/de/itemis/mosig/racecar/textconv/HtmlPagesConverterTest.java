@@ -35,21 +35,21 @@ public class HtmlPagesConverterTest {
 
     @Test
     public void shouldReturnFullFileContentsIfThereAreNoPageBreaks() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTest("no_page_breaks.txt");
+        HtmlPagesConverter underTest = prepareUnderTestOld("no_page_breaks.txt");
 
         assertPageContents(underTest, "Hello World!<br />");
     }
 
     @Test
     public void shouldReturnEmptyStringOnEmptyFile() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTest("empty.txt");
+        HtmlPagesConverter underTest = prepareUnderTestOld("empty.txt");
 
         assertPageContents(underTest, "");
     }
 
     @Test
     public void shouldReturnEmptyStringIfPageIsNegative() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTest("empty.txt");
+        HtmlPagesConverter underTest = prepareUnderTestOld("empty.txt");
 
         String result = underTest.getHtmlPage(-1);
         Assert.assertNull(getPage(underTest, -1));
@@ -57,14 +57,14 @@ public class HtmlPagesConverterTest {
 
     @Test
     public void shouldReturnTwoEmptyPagesIfFileContainsOnePageBreak() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTest("only_one_page_break.txt");
+        HtmlPagesConverter underTest = prepareUnderTestOld("only_one_page_break.txt");
 
         assertPageContents(underTest, "", "");
     }
 
     @Test
     public void shouldReturnFourEmptyPagesIfFileContainsThreePageBreaks() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTest("only_multiple_page_breaks.txt");
+        HtmlPagesConverter underTest = prepareUnderTestOld("only_multiple_page_breaks.txt");
 
         assertPageContents(underTest, "", "", "", "");
     }
@@ -126,7 +126,7 @@ public class HtmlPagesConverterTest {
         return new HtmlPagesConverter(Arrays.asList(fileContents));
     }
 
-    private HtmlPagesConverter prepareUnderTest(String resourceName) {
+    private HtmlPagesConverter prepareUnderTestOld(String resourceName) {
         String filePath = prepareTestFile(resourceName).toString();
 
         HtmlPagesConverter result = null;
