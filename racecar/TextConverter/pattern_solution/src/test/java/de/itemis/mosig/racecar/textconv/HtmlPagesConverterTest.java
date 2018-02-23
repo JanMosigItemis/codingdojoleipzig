@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -74,18 +73,6 @@ public class HtmlPagesConverterTest {
         HtmlPagesConverter underTest = prepareUnderTest(PAGE_BREAK, PAGE_BREAK);
 
         assertPageContents(underTest, "", "", "");
-    }
-
-    @Test
-    public void shouldThrowIoExceptionIfFileDoesNotExist() {
-        String nonExistingFileName = "this_file_does_not_exist";
-        try {
-            new HtmlPagesConverter(nonExistingFileName);
-            Assert.fail();
-        } catch (IOException e) {
-            Assert.assertEquals(FileNotFoundException.class.getSimpleName(), e.getClass().getSimpleName());
-            Assert.assertTrue(e.getMessage().contains(nonExistingFileName));
-        }
     }
 
     /*
