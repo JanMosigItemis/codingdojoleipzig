@@ -35,7 +35,7 @@ public class HtmlPagesConverterTest {
 
     @Test
     public void shouldReturnFullFileContentsIfThereAreNoPageBreaks() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTestOld("no_page_breaks.txt");
+        HtmlPagesConverter underTest = prepareUnderTest("Hello World!");
 
         assertPageContents(underTest, "Hello World!<br />");
     }
