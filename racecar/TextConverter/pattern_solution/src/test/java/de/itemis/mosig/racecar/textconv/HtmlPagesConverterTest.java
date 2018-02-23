@@ -42,7 +42,7 @@ public class HtmlPagesConverterTest {
 
     @Test
     public void shouldReturnEmptyStringOnEmptyFile() throws IOException {
-        HtmlPagesConverter underTest = prepareUnderTestOld("empty.txt");
+        HtmlPagesConverter underTest = prepareUnderTest("");
 
         assertPageContents(underTest, "");
     }
