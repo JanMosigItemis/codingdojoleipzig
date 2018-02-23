@@ -40,15 +40,19 @@ public class HtmlPagesConverter {
 
     public String getHtmlPage(int pageNbr) throws IOException {
         if (filename == null) {
-            switch (pageNbr) {
-                case 0:
-                    return "Hello<br />";
-                case 1:
-                    return "World<br />";
-                case 2:
-                    return "!<br />";
-                default:
-                    return null;
+            if (pageNbr < contents.size()) {
+                switch (pageNbr) {
+                    case 0:
+                        return contents.get(0) + "<br />";
+                    case 1:
+                        return "World<br />";
+                    case 2:
+                        return "!<br />";
+                    default:
+                        return null;
+                }
+            } else {
+                return null;
             }
         } else {
             return internalGetHtmlPageFromFile(pageNbr);
